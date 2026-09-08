@@ -2,27 +2,30 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./db");
+const path = require("path");
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use(express.json());
 
 // DB
 connectDB();
 
 // Serve static files from uploads directory
-const path = require("path");
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 const routes = [
   ["/patients", require("./routes/patients")],
   ["/doctors", require("./routes/doctors")],
-  ["/doctor", require("./routes/doctors")], // Singular mapping for compatibility
+  ["/doctor", require("./routes/doctors")],
   ["/admins", require("./routes/admins")],
-  ["/admin", require("./routes/admins")], // Singular mapping for compatibility
+  ["/admin", require("./routes/admins")],
   ["/ecg", require("./routes/ecg")],
   ["/medications", require("./routes/medications")],
   ["/reports", require("./routes/reports")],
@@ -51,6 +54,7 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () =>
-  console.log(`🚀 Server running on http://localhost:${PORT}`)
+
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`🚀 Server running on port ${PORT}`)
 );
