@@ -8,10 +8,9 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'https://frontend-4a241cyx9-noorjahan26s-projects.vercel.app',
+    origin: 'https://frontend-sooty-one-74.vercel.app',
     credentials: true
 }));
-
 // DB
 connectDB();
 
