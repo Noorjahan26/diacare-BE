@@ -8,10 +8,9 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://frontend-4a241cyx9-noorjahan26s-projects.vercel.app',
     credentials: true
 }));
-app.use(express.json());
 
 // DB
 connectDB();
