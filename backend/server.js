@@ -12,6 +12,7 @@ app.use(cors({
     credentials: true
 }));
 // DB
+app.use(express.json()); 
 connectDB();
 
 // Serve static files from uploads directory
